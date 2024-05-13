@@ -8,7 +8,7 @@
     "dev-client": "vite --host --config vite.config.client.js",
     "build-client": "vite build --config vite.config.client.js",
     "preview-client": "vite preview --config vite.config.client.js",
-    "lint": "npx eslint ."
+    "lint": "eslint ."
   },
   "type": "module",
   "dependencies": {
@@ -18,9 +18,7 @@
     "bootstrap": "^5.3.3",
     "codemirror": "^6.0.1",
     "vue": "^3.4.27",
-    "vue-codemirror": "^6.1.1",
-    "vue-froala-wysiwyg": "^4.2.0",
-    "vue-router": "^4.3.2"
+    "vue-codemirror": "^6.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.2.0",

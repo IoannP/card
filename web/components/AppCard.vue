@@ -1,15 +1,23 @@
 <template>
   <div class="d-flex justify-content-center align-items-center w-100 h-100">
     <article v-if="isTemplateLoaded">
-      <component v-if="isCustomComponent" :is="customComponent"/>
+      <component
+        :is="customComponent"
+        v-if="isCustomComponent" 
+      />
       <div
         v-else
         class="card"
       >
-        <img :src="cardData.url" class="card-img-top">
+        <img
+          :src="cardData.url" 
+          class="card-img-top"
+        >
         <div class="card-body">
           <h3>{{ cardData.title }}</h3>
-          <p class="card-text">{{ cardData.text }}</p>
+          <p class="card-text">
+            {{ cardData.text }}
+          </p>
         </div>
       </div>
     </article>
@@ -18,18 +26,18 @@
 </template>
 
 <script setup>
-import { reactive, ref, defineComponent } from 'vue'
-import Loader from './Loader.vue';
+import { defineComponent, ref } from 'vue'
+import Loader from './AppLoader.vue';
 
 const isTemplateLoaded = ref(false);
 const isCustomComponent = ref(false);
-const cardData = reactive({
-  title: '',
-  text: '',
-  url: ''
-});
+const cardData = ref({ title: '', text: '', url: '' });
 
-const customComponent = defineComponent({ template: '', data: () => ({ cardData }) });
+const setupComponent = (template) => defineComponent({
+  data: () => ({ cardData }),
+  template: template, 
+});
+let customComponent = setupComponent();
 
 const loadCardData = async () => {
   isTemplateLoaded.value = false;
@@ -37,19 +45,17 @@ const loadCardData = async () => {
   await fetch('http://localhost:3000/data')
     .then((response) => response.json())
     .then((data) => {
-      cardData.title = data.title;
-      cardData.text = data.text;
-      cardData.url = data.url;
+      cardData.value = data;
     })
     .catch((error) => console.error('Error during load card data: ', error.message));
 
   await fetch('http://localhost:3000/settings')
     .then((response) => response.json())
-    .then((data) => {
+    .then(async (data) => {
       const { template = '', styles } = data;
 
       isCustomComponent.value = template.length > 0;
-      customComponent.template = template;
+      customComponent = setupComponent(template);
 
       let styleElement = document.getElementById('card-styles');
       if (styleElement) {
@@ -63,6 +69,7 @@ const loadCardData = async () => {
         styleElement.textContent = data.styles;
         document.head.appendChild(styleElement); 
       }
+
     })
     .catch((error) => console.error('Error during load card template settings: ', error));
 

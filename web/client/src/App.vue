@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import Card from '../../components/Card.vue';
+import Card from '../../components/AppCard.vue';
 </script>
 
 <style lang="scss">
