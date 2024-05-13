@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "npx nodemon bin/server.js",
     "test": "node --test",
-    "lint": "npx eslint ."
+    "lint": "eslint ."
   },
   "type": "module",
   "devDependencies": {
