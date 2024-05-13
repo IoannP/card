@@ -1,0 +1,34 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "scripts": {
+    "dev-admin": "vite --host --config vite.config.admin.js",
+    "build-admin": "vite build --config vite.config.admin.js",
+    "preview-admin": "vite preview --config vite.config.admin.js",
+    "dev-client": "vite --host --config vite.config.client.js",
+    "build-client": "vite build --config vite.config.client.js",
+    "preview-client": "vite preview --config vite.config.client.js",
+    "lint": "npx eslint ."
+  },
+  "type": "module",
+  "dependencies": {
+    "@codemirror/lang-html": "^6.4.9",
+    "@codemirror/theme-one-dark": "^6.1.2",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3",
+    "codemirror": "^6.0.1",
+    "vue": "^3.4.27",
+    "vue-codemirror": "^6.1.1",
+    "vue-froala-wysiwyg": "^4.2.0",
+    "vue-router": "^4.3.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.2.0",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "eslint": "^9.2.0",
+    "eslint-plugin-vue": "^9.26.0",
+    "globals": "^15.2.0",
+    "sass": "^1.77.1",
+    "vite": "^5.2.11"
+  }
+}

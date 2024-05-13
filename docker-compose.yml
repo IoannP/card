@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  server:
+    build:
+      context: server
+      dockerfile: Dockerfile
+    working_dir: /server
+    command: npm run dev
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    volumes:
+      - "./server:/server:delegated"
+    env_file:
+        - .env
+
+  client:
+    build:
+      context: web
+      dockerfile: Dockerfile.client
+    working_dir: /web
+    command: npm run dev-client
+    ports:
+      - "${CLIENT_PORT}:${CLIENT_PORT}"
+    volumes:
+      - "./web:/web:delegated"
+    depends_on:
+      - server
+    env_file:
+        - .env
+
+  admin:
+    build:
+      context: web
+      dockerfile: Dockerfile.admin
+    working_dir: /web
+    command: npm run dev-admin
+    ports:
+      - "${ADMIN_PORT}:${ADMIN_PORT}"
+    volumes:
+      - "./web:/web:delegated"
+    depends_on:
+      - server
+    env_file:
+        - .env
